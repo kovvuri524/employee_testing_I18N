@@ -59,21 +59,35 @@ employee_testing/
 
 ## Setup
 
-Create a virtual environment:
+### Create Virtual Environment
+
+#### Windows
 
 ```bash
 python -m venv venv
 ```
 
-Activate the virtual environment:
+#### Linux / macOS
 
-### Windows
+```bash
+python3 -m venv .venv
+```
+
+### Activate Virtual Environment
+
+#### Windows
 
 ```bash
 venv\Scripts\activate
 ```
 
-Install dependencies:
+#### Linux / macOS
+
+```bash
+source .venv/bin/activate
+```
+
+### Install Dependencies
 
 ```bash
 pip install -r requirements.txt
