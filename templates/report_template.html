@@ -1,0 +1,167 @@
+<!-- Report Template (report_template.html)
+
+Purpose:
+Provides the HTML structure for the test execution report and displays dynamic test result data.
+
+Responsibilities:
+1. Display the report title.
+2. Display the selected language flag.
+3. Display the language selection dropdown.
+4. Provide Dark/Light mode support.
+5. Provide test result search functionality.
+6. Display test execution summary (Total, Passed, Failed).
+7. Display test results in a table format.
+8. Display report generation timestamp.
+9. Render dynamic values using Jinja2 placeholders.
+10. Support internationalization (I18N) through JavaScript language switching.
+11. Load styling from styles.css.
+12. Load interactive functionality from app.js.
+
+Dynamic Data:
+- {{ total }}       : Total test count
+- {{ passed }}      : Passed test count
+- {{ failed }}      : Failed test count
+- {{ generated_on }}: Report generation timestamp
+- {{ t.nodeid }}    : Test case name
+- {{ t.outcome }}   : Test case execution status -->
+
+
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Employee API Test Report
+    </title>
+
+    <link rel="stylesheet" href="../css/styles.css">
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1 id="title">
+            Employee API Test Report
+        </h1>
+
+        <div class="toolbar">
+
+            <img id="flagIcon" src="../images/us.webp" alt="Flag" width="30" height="20">
+
+            <select id="languageSelect">
+            </select>
+
+            <button id="darkModeBtn" onclick="toggleTheme()">
+
+                Dark Mode
+
+            </button>
+
+            <input id="searchInput" type="text" placeholder="Search">
+
+        </div>
+
+        <div class="cards">
+
+            <div class="card">
+
+                <h3 id="totalLabel">
+                    Total Tests
+                </h3>
+
+                <p>
+                    {{ total }}
+                </p>
+
+            </div>
+
+            <div class="card">
+
+                <h3 id="passedLabel">
+                    Passed
+                </h3>
+
+                <p>
+                    {{ passed }}
+                </p>
+
+            </div>
+
+            <div class="card">
+
+                <h3 id="failedLabel">
+                    Failed
+                </h3>
+
+                <p>
+                    {{ failed }}
+                </p>
+
+            </div>
+
+        </div>
+
+        <table id="resultsTable">
+
+            <thead>
+
+                <tr>
+
+                    <th id="testHeader">
+                        Test
+                    </th>
+
+                    <th id="statusHeader">
+                        Status
+                    </th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for t in tests %}
+
+                <tr>
+
+                    <td>
+                        {{ t.nodeid }}
+                    </td>
+
+                    <td class="status" data-status="{{ t.outcome }}">
+                        {{ t.outcome }}
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+        <p>
+
+            <span id="generatedOnLabel">
+                Generated On
+            </span>
+
+            : {{ generated_on }}
+
+        </p>
+
+    </div>
+
+    <script src="../js/app.js"></script>
+
+</body>
+
+</html>
